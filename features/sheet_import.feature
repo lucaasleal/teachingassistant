@@ -12,3 +12,8 @@ Scenario: Visualização da análise de autoavaliações
 Given Eu estou na página de autoavaliações dos alunos
 And Consigo ver a quantidade de alunos discrepantes e normais
 And Consigo ver uma tabela vazia com as colunas “Nome do aluno” e “Porcentagem”.
+
+Scenario:  Importar planilha de turma de forma correta
+Given O sistema não possui os alunos “Norman Osborn” e “Otto Octavius”
+When Envio a planilha contendo os nomes “Norman Osborn” e “Otto Octavius”, seus e-mails “no@cin.ufpe.br” e “oo@cin.ufpe.br” e CPFs “123.433.444-10” e “123.533.444-10”.
+Then os dois novos alunos são inseridos no sistema com os respectivos dados.
