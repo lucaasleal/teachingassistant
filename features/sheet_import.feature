@@ -20,5 +20,5 @@ Then os dois novos alunos não são inseridos no sistema e é retornada uma mens
 
 Scenario: Importar planilha com dados faltando
 Given O sistema não possui os alunos “Norman Osborn” e “Otto Octavius”
-When Envio a planilha contendo os nomes “Norman Osborn” e “Otto Octavius”, seus e-mails “no@cin.ufpe.br” e “oo@cin.ufpe.br”.
+When Envio a planilha contendo os nomes “Norman Osborn” e “Otto Octavius”, seus e-mails “no@cin.ufpe.br” e “oo@cin.ufpe.br”, e seus CPFS vazios.
 Then os dois novos alunos não são inseridos no sistema e é retornada uma mensagem de erro "CPF obrigatório".
