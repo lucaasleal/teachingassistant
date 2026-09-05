@@ -5,7 +5,7 @@ So that os alunos sejam cadastrados no sistema de forma rápida e correta.
 
 Scenario: Importação de planilha em formato incompatível
 Given O sistema não possui os alunos “Norman Osborn” e “Otto Octavius”
-When Envio a planilha contendo os nomes “Norman Osborn” e “Otto Octavius”, seus e-mails “no@cin.ufpe.br” e “oo@cin.ufpe.br” e suas MATRICULAS“123” e “543”.
+When Envio a planilha contendo os nomes “Norman Osborn” e “Otto Octavius”, seus e-mails “no@cin.ufpe.br” e “oo@cin.ufpe.br” e suas MATRICULAS “123” e “543”.
 Then os dois novos alunos não são inseridos no sistema e é retornada uma mensagem de erro.
 
 Scenario:  Importar planilha de turma de forma correta
@@ -18,7 +18,7 @@ Given O sistema não possui os alunos “Norman Osborn” e “Otto Octavius”
 When Envio a planilha contendo os nomes “Norman Osborn” e “Otto Octavius”, suas matriculas “123” e “543” e CPFs “123.433.444-10” e “123.533.444-10”.
 Then os dois novos alunos não são inseridos no sistema e é retornada uma mensagem de erro "Coluna esperada: E-MAIL".
 
-Scenario:  XXXXXXX
-Given XXXXXX
-When XXXXXXX
-Then XXXXXX
+Scenario: Importar planilha com dados faltando
+Given O sistema não possui os alunos “Norman Osborn” e “Otto Octavius”
+When Envio a planilha contendo os nomes “Norman Osborn” e “Otto Octavius”, seus e-mails “no@cin.ufpe.br” e “oo@cin.ufpe.br”.
+Then os dois novos alunos não são inseridos no sistema e é retornada uma mensagem de erro "CPF obrigatório".
