@@ -12,3 +12,8 @@ Scenario:  Importar planilha de turma de forma correta
 Given O sistema não possui os alunos “Norman Osborn” e “Otto Octavius”
 When Envio a planilha contendo os nomes “Norman Osborn” e “Otto Octavius”, seus e-mails “no@cin.ufpe.br” e “oo@cin.ufpe.br” e CPFs “123.433.444-10” e “123.533.444-10”.
 Then os dois novos alunos são inseridos no sistema com os respectivos dados.
+
+Scenario:  Importar planilha com colunas incorretas
+Given O sistema não possui os alunos “Norman Osborn” e “Otto Octavius”
+When Envio a planilha contendo os nomes “Norman Osborn” e “Otto Octavius”, suas matriculas “123” e “543” e CPFs “123.433.444-10” e “123.533.444-10”.
+Then os dois novos alunos não são inseridos no sistema e é retornada uma mensagem de erro "Coluna esperada: E-MAIL".
