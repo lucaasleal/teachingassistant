@@ -4,13 +4,6 @@ I want to importar os alunos de uma turma por meio de uma planilha
 So that os alunos sejam cadastrados no sistema de forma rápida e correta.
 
 #Serviço
-Scenario: Importação de planilha em formato de arquivo incompatível
-Given o sistema possui os alunos “Mary Jane” com e-mail “mj@cin.ufpe.br” e CPF “111.222.333-44” e “Harry Osborn” com e-mail “ho@cin.ufpe.br” e CPF “222.333.444-55”
-When envio um arquivo PDF contendo os nomes “Norman Osborn” e “Otto Octavius”, seus e-mails “no@cin.ufpe.br” e “oo@cin.ufpe.br” e seus CPFs “123.433.444-10” e “123.533.444-10”
-Then os alunos “Norman Osborn” e “Otto Octavius” não são inseridos no sistema
-And os alunos “Mary Jane” e “Harry Osborn” permanecem cadastrados no sistema
-And é retornada uma mensagem de erro informando que o formato do arquivo não é compatível.
-
 Scenario: Importar planilha de turma de forma correta
 Given o sistema possui os alunos “Mary Jane” com e-mail “mj@cin.ufpe.br” e CPF “111.222.333-44” e “Harry Osborn” com e-mail “ho@cin.ufpe.br” e CPF “222.333.444-55”
 When envio uma planilha contendo os nomes “Norman Osborn” e “Otto Octavius”, seus e-mails “no@cin.ufpe.br” e “oo@cin.ufpe.br” e CPFs “123.433.444-10” e “123.533.444-10”
@@ -71,24 +64,25 @@ Given o sistema possui os alunos “Mary Jane” com e-mail “mj@cin.ufpe.br”
 When envio uma planilha sem registros de alunos
 Then nenhum novo aluno é inserido no sistema
 And os alunos “Mary Jane” e “Harry Osborn” permanecem cadastrados no sistema
-And é retornada uma mensagem de erro.
+And é retornada uma mensagem de erro "ERRO: Planilha vazia".
 
 Scenario Outline: Importar planilha em formato de arquivo compatível
 Given o sistema possui o aluno “Mary Jane” com e-mail “[mj@cin.ufpe.br](mailto:mj@cin.ufpe.br)” e CPF “111.222.333-44”
-When envio um arquivo <formato> contendo os nomes “Norman Osborn” e “Otto Octavius”, seus e-mails “[no@cin.ufpe.br](mailto:no@cin.ufpe.br)” e “[oo@cin.ufpe.br](mailto:oo@cin.ufpe.br)” e CPFs “123.433.444-10” e “123.533.444-10”
+When envio um arquivo <formato> contendo os nomes “Norman Osborn” e “Otto Octavius”, seus e-mails “no@cin.ufpe.br” e “oo@cin.ufpe.br” e CPFs “123.433.444-10” e “123.533.444-10”
 Then os alunos “Norman Osborn” e “Otto Octavius” são inseridos no sistema com os respectivos dados
-And o aluno “Mary Jane” permanece cadastrado no sistema com o e-mail “[mj@cin.ufpe.br](mailto:mj@cin.ufpe.br)” e CPF “111.222.333-44”.
+And o aluno “Mary Jane” permanece cadastrado no sistema com o e-mail “mj@cin.ufpe.br” e CPF “111.222.333-44”.
 
 Examples:
 | formato |
 | CSV     |
 | XLSX    |
 
+
 Scenario Outline: Importar arquivo em formato incompatível
-Given o sistema possui o aluno “Mary Jane” com e-mail “[mj@cin.ufpe.br](mailto:mj@cin.ufpe.br)” e CPF “111.222.333-44”
-When envio um arquivo <formato> contendo os dados dos alunos “Norman Osborn” e “Otto Octavius”
+Given o sistema possui o aluno “Mary Jane” com e-mail “mj@cin.ufpe.br” e CPF “111.222.333-44”
+When envio um arquivo <formato> contendo os nomes “Norman Osborn” e “Otto Octavius”, seus e-mails “no@cin.ufpe.br” e “oo@cin.ufpe.br” e seus CPFs “123.433.444-10” e “123.533.444-10”
 Then os alunos “Norman Osborn” e “Otto Octavius” não são inseridos no sistema
-And o aluno “Mary Jane” permanece cadastrado no sistema com o e-mail “[mj@cin.ufpe.br](mailto:mj@cin.ufpe.br)” e CPF “111.222.333-44”
+And o aluno “Mary Jane” permanece cadastrado no sistema com o e-mail “mj@cin.ufpe.br” e CPF “111.222.333-44”
 And é retornada uma mensagem de erro informando que o formato do arquivo não é compatível.
 
 Examples:
