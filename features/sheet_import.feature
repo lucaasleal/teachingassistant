@@ -5,34 +5,39 @@ So that os alunos sejam cadastrados no sistema de forma rápida e correta.
 
 #Serviço
 Scenario: Importar planilha de turma de forma correta
-Given o sistema possui os alunos “Mary Jane” com e-mail “mj@cin.ufpe.br” e CPF “111.222.333-44” e “Harry Osborn” com e-mail “ho@cin.ufpe.br” e CPF “222.333.444-55”
+Given o sistema possui o aluno “Mary Jane” com e-mail “mj@cin.ufpe.br” e CPF “111.222.333-44” 
+And o sistema possui “Harry Osborn” com e-mail “ho@cin.ufpe.br” e CPF “222.333.444-55”
 When envio uma planilha contendo os nomes “Norman Osborn” e “Otto Octavius”, seus e-mails “no@cin.ufpe.br” e “oo@cin.ufpe.br” e CPFs “123.433.444-10” e “123.533.444-10”
 Then os alunos “Norman Osborn” e “Otto Octavius” são inseridos no sistema com os respectivos dados
 And os alunos “Mary Jane” e “Harry Osborn” permanecem cadastrados no sistema.
 
 Scenario: Importar planilha com coluna incorreta
-Given o sistema possui os alunos “Mary Jane” com e-mail “mj@cin.ufpe.br” e CPF “111.222.333-44” e “Harry Osborn” com e-mail “ho@cin.ufpe.br” e CPF “222.333.444-55”
+Given o sistema possui o aluno “Mary Jane” com e-mail “mj@cin.ufpe.br” e CPF “111.222.333-44” 
+And o sistema possui “Harry Osborn” com e-mail “ho@cin.ufpe.br” e CPF “222.333.444-55”
 When envio uma planilha contendo os nomes “Norman Osborn” e “Otto Octavius”, suas matrículas “123” e “543” e CPFs “123.433.444-10” e “123.533.444-10”
 Then os alunos “Norman Osborn” e “Otto Octavius” não são inseridos no sistema
 And os alunos “Mary Jane” e “Harry Osborn” permanecem cadastrados no sistema
 And é retornada uma mensagem de erro "ERRO: Coluna Incorreta".
 
 Scenario: Importar planilha com coluna faltante
-Given o sistema possui os alunos “Mary Jane” com e-mail “mj@cin.ufpe.br” e CPF “111.222.333-44” e “Harry Osborn” com e-mail “ho@cin.ufpe.br” e CPF “222.333.444-55”
+Given o sistema possui o aluno “Mary Jane” com e-mail “mj@cin.ufpe.br” e CPF “111.222.333-44” 
+And o sistema possui “Harry Osborn” com e-mail “ho@cin.ufpe.br” e CPF “222.333.444-55”
 When envio uma planilha contendo os nomes “Norman Osborn” e “Otto Octavius” e seus e-mails “no@cin.ufpe.br” e “oo@cin.ufpe.br”
 Then os alunos “Norman Osborn” e “Otto Octavius” não são inseridos no sistema
 And os alunos “Mary Jane” e “Harry Osborn” permanecem cadastrados no sistema
 And é retornada uma mensagem de erro "ERRO: Coluna faltando".
 
 Scenario: Importar planilha com coluna extra
-Given o sistema possui os alunos “Mary Jane” com e-mail “mj@cin.ufpe.br” e CPF “111.222.333-44” e “Harry Osborn” com e-mail “ho@cin.ufpe.br” e CPF “222.333.444-55”
+Given o sistema possui o aluno “Mary Jane” com e-mail “mj@cin.ufpe.br” e CPF “111.222.333-44” 
+And o sistema possui “Harry Osborn” com e-mail “ho@cin.ufpe.br” e CPF “222.333.444-55”
 When envio uma planilha contendo os nomes “Norman Osborn” e “Otto Octavius”, seus e-mails “no@cin.ufpe.br” e “oo@cin.ufpe.br”, CPFs “123.433.444-10” e “123.533.444-10” e telefones “10991234567” e “10919891122”
 Then os alunos “Norman Osborn” e “Otto Octavius” não são inseridos no sistema
 And os alunos “Mary Jane” e “Harry Osborn” permanecem cadastrados no sistema
 And é retornada uma mensagem de erro "ERRO: Coluna extra".
 
 Scenario: Importar planilha com dados faltando
-Given o sistema possui os alunos “Mary Jane” com e-mail “mj@cin.ufpe.br” e CPF “111.222.333-44” e “Harry Osborn” com e-mail “ho@cin.ufpe.br” e CPF “222.333.444-55”
+Given o sistema possui o aluno “Mary Jane” com e-mail “mj@cin.ufpe.br” e CPF “111.222.333-44” 
+And o sistema possui “Harry Osborn” com e-mail “ho@cin.ufpe.br” e CPF “222.333.444-55”
 When envio uma planilha contendo os nomes “Norman Osborn” e “Otto Octavius”, seus e-mails “no@cin.ufpe.br” e “oo@cin.ufpe.br” e seus CPFs vazios
 Then os alunos “Norman Osborn” e “Otto Octavius” não são inseridos no sistema
 And os alunos “Mary Jane” e “Harry Osborn” permanecem cadastrados no sistema
@@ -67,7 +72,7 @@ And os alunos “Mary Jane” e “Harry Osborn” permanecem cadastrados no sis
 And é retornada uma mensagem de erro "ERRO: Planilha vazia".
 
 Scenario Outline: Importar planilha em formato de arquivo compatível
-Given o sistema possui o aluno “Mary Jane” com e-mail “[mj@cin.ufpe.br](mailto:mj@cin.ufpe.br)” e CPF “111.222.333-44”
+Given o sistema possui o aluno “Mary Jane” com e-mail "mj@cin.ufpe.br" e CPF “111.222.333-44”
 When envio um arquivo <formato> contendo os nomes “Norman Osborn” e “Otto Octavius”, seus e-mails “no@cin.ufpe.br” e “oo@cin.ufpe.br” e CPFs “123.433.444-10” e “123.533.444-10”
 Then os alunos “Norman Osborn” e “Otto Octavius” são inseridos no sistema com os respectivos dados
 And o aluno “Mary Jane” permanece cadastrado no sistema com o e-mail “mj@cin.ufpe.br” e CPF “111.222.333-44”.
@@ -94,21 +99,24 @@ Examples:
 # GUI
 Scenario: Acessar a funcionalidade de importação
 Given estou na página de gerenciamento dos alunos da disciplina "ESS 2026.2"
-And o sistema possui os alunos “Mary Jane” com e-mail “mj@cin.ufpe.br” e CPF “111.222.333-44” e “Harry Osborn” com e-mail “ho@cin.ufpe.br” e CPF “222.333.444-55”
+And o sistema possui o aluno “Mary Jane” com e-mail “mj@cin.ufpe.br” e CPF “111.222.333-44” 
+And o sistema possui “Harry Osborn” com e-mail “ho@cin.ufpe.br” e CPF “222.333.444-55”
 When acesso a opção de importar alunos por planilha
 Then é exibida a interface de importação de alunos
 And os alunos “Mary Jane” e “Harry Osborn” permanecem exibidos na lista de alunos.
 
 Scenario: Exibir seletor de arquivo
 Given estou na interface de importação de alunos
-And o sistema possui os alunos “Mary Jane” com e-mail “mj@cin.ufpe.br” e CPF “111.222.333-44” e “Harry Osborn” com e-mail “ho@cin.ufpe.br” e CPF “222.333.444-55”
+And o sistema possui o aluno “Mary Jane” com e-mail “mj@cin.ufpe.br” e CPF “111.222.333-44” 
+And o sistema possui “Harry Osborn” com e-mail “ho@cin.ufpe.br” e CPF “222.333.444-55”
 When seleciono a opção para escolher uma planilha
 Then é exibida a janela de seleção de arquivos do sistema
 And os alunos “Mary Jane” e “Harry Osborn” permanecem cadastrados no sistema.
 
 Scenario: Selecionar uma planilha válida
 Given estou na interface de importação de alunos
-And o sistema possui os alunos “Mary Jane” com e-mail “mj@cin.ufpe.br” e CPF “111.222.333-44” e “Harry Osborn” com e-mail “ho@cin.ufpe.br” e CPF “222.333.444-55”
+And o sistema possui o aluno “Mary Jane” com e-mail “mj@cin.ufpe.br” e CPF “111.222.333-44” 
+And o sistema possui “Harry Osborn” com e-mail “ho@cin.ufpe.br” e CPF “222.333.444-55”
 When seleciono um arquivo CSV contendo os alunos “Norman Osborn” e “Otto Octavius”
 Then o nome do arquivo selecionado é exibido na interface
 And a opção de importar os alunos fica disponível
@@ -116,7 +124,8 @@ And os alunos “Mary Jane” e “Harry Osborn” permanecem cadastrados no sis
 
 Scenario: Importar planilha válida pela interface
 Given estou na interface de importação de alunos
-And o sistema possui os alunos “Mary Jane” com e-mail “mj@cin.ufpe.br” e CPF “111.222.333-44” e “Harry Osborn” com e-mail “ho@cin.ufpe.br” e CPF “222.333.444-55”
+And o sistema possui o aluno “Mary Jane” com e-mail “mj@cin.ufpe.br” e CPF “111.222.333-44” 
+And o sistema possui “Harry Osborn” com e-mail “ho@cin.ufpe.br” e CPF “222.333.444-55”
 And selecionei uma planilha válida contendo os alunos “Norman Osborn” e “Otto Octavius”
 When aciono a opção de importar os alunos
 Then é exibida uma mensagem de sucesso
@@ -125,7 +134,8 @@ And os alunos “Mary Jane” e “Harry Osborn” permanecem exibidos na lista 
 
 Scenario: Cancelar a seleção da planilha
 Given estou na interface de importação de alunos
-And o sistema possui os alunos “Mary Jane” com e-mail “mj@cin.ufpe.br” e CPF “111.222.333-44” e “Harry Osborn” com e-mail “ho@cin.ufpe.br” e CPF “222.333.444-55”
+And o sistema possui o aluno “Mary Jane” com e-mail “mj@cin.ufpe.br” e CPF “111.222.333-44” 
+And o sistema possui “Harry Osborn” com e-mail “ho@cin.ufpe.br” e CPF “222.333.444-55”
 And a janela de seleção de arquivos está aberta
 When cancelo a seleção do arquivo
 Then retorno para a interface de importação
@@ -134,7 +144,8 @@ And os alunos “Mary Jane” e “Harry Osborn” permanecem cadastrados no sis
 
 Scenario: Tentar importar sem selecionar uma planilha
 Given estou na interface de importação de alunos
-And o sistema possui os alunos “Mary Jane” com e-mail “mj@cin.ufpe.br” e CPF “111.222.333-44” e “Harry Osborn” com e-mail “ho@cin.ufpe.br” e CPF “222.333.444-55”
+And o sistema possui o aluno “Mary Jane” com e-mail “mj@cin.ufpe.br” e CPF “111.222.333-44” 
+And o sistema possui “Harry Osborn” com e-mail “ho@cin.ufpe.br” e CPF “222.333.444-55”
 And nenhuma planilha foi selecionada
 When aciono a opção de importar os alunos
 Then a importação não é realizada
@@ -143,7 +154,8 @@ And os alunos “Mary Jane” e “Harry Osborn” permanecem cadastrados no sis
 
 Scenario: Exibir erro ao selecionar arquivo em formato incompatível
 Given estou na interface de importação de alunos
-And o sistema possui os alunos “Mary Jane” com e-mail “mj@cin.ufpe.br” e CPF “111.222.333-44” e “Harry Osborn” com e-mail “ho@cin.ufpe.br” e CPF “222.333.444-55”
+And o sistema possui o aluno “Mary Jane” com e-mail “mj@cin.ufpe.br” e CPF “111.222.333-44” 
+And o sistema possui “Harry Osborn” com e-mail “ho@cin.ufpe.br” e CPF “222.333.444-55”
 When seleciono um arquivo PDF contendo dados de alunos
 Then a importação não é realizada
 And é exibida uma mensagem de erro informando que o formato do arquivo não é compatível
@@ -151,7 +163,8 @@ And os alunos “Mary Jane” e “Harry Osborn” permanecem cadastrados no sis
 
 Scenario: Exibir erro de validação da planilha
 Given estou na interface de importação de alunos
-And o sistema possui os alunos “Mary Jane” com e-mail “mj@cin.ufpe.br” e CPF “111.222.333-44” e “Harry Osborn” com e-mail “ho@cin.ufpe.br” e CPF “222.333.444-55”
+And o sistema possui o aluno “Mary Jane” com e-mail “mj@cin.ufpe.br” e CPF “111.222.333-44” 
+And o sistema possui “Harry Osborn” com e-mail “ho@cin.ufpe.br” e CPF “222.333.444-55”
 When seleciono uma planilha contendo os alunos “Norman Osborn” e “Otto Octavius” sem a coluna CPF
 And aciono a opção de importar os alunos
 Then a importação não é realizada
@@ -161,7 +174,8 @@ And os alunos “Norman Osborn” e “Otto Octavius” não são exibidos na li
 
 Scenario: Exibir confirmação após importação
 Given estou na interface de importação de alunos
-And o sistema possui os alunos “Mary Jane” com e-mail “mj@cin.ufpe.br” e CPF “111.222.333-44” e “Harry Osborn” com e-mail “ho@cin.ufpe.br” e CPF “222.333.444-55”
+And o sistema possui o aluno “Mary Jane” com e-mail “mj@cin.ufpe.br” e CPF “111.222.333-44” 
+And o sistema possui “Harry Osborn” com e-mail “ho@cin.ufpe.br” e CPF “222.333.444-55”
 And selecionei uma planilha válida contendo os alunos “Norman Osborn” e “Otto Octavius”
 When importo a planilha
 Then é exibida uma confirmação de que os alunos foram importados com sucesso
