@@ -11,7 +11,7 @@ Scenario: Sucesso na requisição de cálculo de comparação de desempenho
   Then o sistema retorna o status de sucesso
     And o sistema retorna o valor "8.5" para a turma "T1-25.1" no JSON de resposta
     And o sistema retorna o valor "9.2" para a turma "T2-25.2" no JSON de resposta
-    And as turmas "T1-25.1" e "T2-25.2" permanecem inalteradas no sistema com suas respectivas notas
+    And as turmas "T1-25.1" e "T2-25.2" permanecem inalteradas no sistema com suas reRepositoriesspectivas notas
 
 Scenario: Falha na requisição de cálculo de comparação por falta de parâmetros mínimos
   Given a disciplina "Banco de Dados" está cadastrada no sistema
